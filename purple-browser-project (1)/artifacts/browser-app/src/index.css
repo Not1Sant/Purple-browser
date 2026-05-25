@@ -1,0 +1,175 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-border: var(--primary-border);
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-border: var(--secondary-border);
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted-border: var(--muted-border);
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-border: var(--accent-border);
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-destructive-border: var(--destructive-border);
+
+  --font-sans: var(--app-font-sans);
+  --font-mono: var(--app-font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 270 60% 8%;
+  --foreground: 270 20% 95%;
+  --border: 270 30% 20%;
+  --input: 270 30% 18%;
+  --ring: 270 80% 65%;
+
+  --card: 270 50% 12%;
+  --card-foreground: 270 20% 95%;
+  --card-border: 270 30% 22%;
+
+  --popover: 270 50% 10%;
+  --popover-foreground: 270 20% 95%;
+  --popover-border: 270 30% 22%;
+
+  --primary: 270 80% 65%;
+  --primary-foreground: 270 10% 5%;
+  --primary-border: hsl(270 80% 57%);
+
+  --secondary: 270 40% 22%;
+  --secondary-foreground: 270 20% 90%;
+  --secondary-border: hsl(270 40% 18%);
+
+  --muted: 270 30% 16%;
+  --muted-foreground: 270 20% 60%;
+  --muted-border: hsl(270 30% 13%);
+
+  --accent: 280 70% 55%;
+  --accent-foreground: 270 10% 5%;
+  --accent-border: hsl(280 70% 47%);
+
+  --destructive: 0 70% 55%;
+  --destructive-foreground: 0 10% 98%;
+  --destructive-border: hsl(0 70% 47%);
+
+  --app-font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --app-font-mono: 'Menlo', 'Monaco', monospace;
+  --radius: 0.5rem;
+
+  --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(255,255,255, .04);
+  --elevate-2: rgba(255,255,255, .09);
+
+  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  html, body, #root {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(270 50% 10%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(270 40% 35%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(270 60% 50%);
+}
+
+/* Tab bar styles */
+.tab-item {
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.tab-item:hover:not(.tab-active) {
+  background-color: hsl(270 40% 20%);
+}
+
+/* URL bar glow on focus */
+.url-bar:focus {
+  box-shadow: 0 0 0 2px hsl(270 80% 65% / 0.4);
+}
+
+/* Iframe blocked overlay */
+.iframe-blocked {
+  background: linear-gradient(135deg, hsl(270 60% 8%) 0%, hsl(280 50% 12%) 100%);
+}
+
+/* Loading spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+/* Launcher grid hover */
+.launcher-item {
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.launcher-item:hover {
+  transform: translateY(-2px);
+  background-color: hsl(270 40% 22%);
+}
+
+/* Pulse for blocked indicator */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
